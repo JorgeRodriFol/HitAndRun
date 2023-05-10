@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 85f79a90e373c3d46bab9764e133125e
+guid: e58a2bcb951b53f48a63a7e300f26c7a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,13 +105,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: john_dead_0
+      name: explosion_0
       rect:
         serializedVersion: 2
-        x: 3
+        x: 5
         y: 0
-        width: 21
-        height: 12
+        width: 20
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,20 +119,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2456d43738aaf1a4b87d112059125fb5
-      internalID: -887805405
+      spriteID: a0b203f7b944f6c4698414afbd79e810
+      internalID: -466204820
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: john_dead_1
+      name: explosion_1
       rect:
         serializedVersion: 2
-        x: 29
+        x: 31
         y: 0
-        width: 21
-        height: 23
+        width: 20
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,20 +140,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 58654c176dbe0ed4c97795081ad257d0
-      internalID: 1850427498
+      spriteID: 533bbf8768d3dec42aad70e790638e0d
+      internalID: -1284155940
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: john_dead_2
+      name: explosion_2
       rect:
         serializedVersion: 2
-        x: 54
+        x: 58
         y: 0
         width: 21
-        height: 27
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,20 +161,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 559780199b070fe4ea52f568106a5ba8
-      internalID: 1912460975
+      spriteID: d0f726bf3a136ac4cbe5c0c7bf179cbd
+      internalID: 134355293
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: john_dead_3
+      name: explosion_3
       rect:
         serializedVersion: 2
-        x: 80
+        x: 85
         y: 0
-        width: 21
-        height: 31
+        width: 20
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,20 +182,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c3e066177e62534fbe6e91b64204e16
-      internalID: -861358338
+      spriteID: 7f2dd8d489423d141b2aaa3fdce84c2b
+      internalID: 4770883
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: john_dead_4
+      name: explosion_5
       rect:
         serializedVersion: 2
-        x: 106
+        x: 111
         y: 0
-        width: 21
-        height: 34
+        width: 20
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,8 +203,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 02b788f7fb1304944ac02db215ab2b35
-      internalID: -351411558
+      spriteID: d5c2347a79800ba42b1038f321bb3054
+      internalID: 1198792710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: explosion_7
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 0
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19c24c9e719f1af49ab2fabcb44d29d8
+      internalID: 668302628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: explosion_8
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 0
+        width: 7
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 883581054ce649744907e6379d04cc9f
+      internalID: -1490483375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: explosion_4
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 0
+        width: 4
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92d47a26f371b4e40b1009fa45b97147
+      internalID: -168427074
       vertices: []
       indices: 
       edges: []
@@ -220,12 +283,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      john_dead_0: -887805405
-      john_dead_1: 1850427498
-      john_dead_2: 1912460975
-      john_dead_3: -861358338
-      john_dead_4: -351411558
-      john_dead_5: 2027847552
+      explosion_0: -466204820
+      explosion_1: -1284155940
+      explosion_2: 134355293
+      explosion_3: 4770883
+      explosion_4: -168427074
+      explosion_5: 1198792710
+      explosion_6: 969408661
+      explosion_7: 668302628
+      explosion_8: -1490483375
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

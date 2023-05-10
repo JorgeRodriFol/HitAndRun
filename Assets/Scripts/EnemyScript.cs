@@ -7,19 +7,27 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-    public GameObject John;
+    private GameObject John;
     public GameObject Bullet;
-    public GameObject XFinal;
-    public GameObject XInitial;
     private bool movingToEndPosition = true;
     private float LastShoot;
     private bool Shooting;
     public float speed;
     private Animator Animator;
+    private int Health;
+    public Vector3 startPos;
+    public Vector3 endPos;
+    public bool moveRight = true;
     // Start is called before the first frame update
     void Start()
     {
+        John = GameObject.Find("john");
+        Health = 100;
         Animator = GetComponent<Animator>();
+        startPos = transform.position;
+        endPos.x = transform.position.x + 1.0f;
+        endPos.y = transform.position.y;
+        endPos.z = transform.position.z;
     }
 
     // Update is called once per frame
@@ -37,35 +45,43 @@ public class EnemyScript : MonoBehaviour
         }
         if (distancia > 1.0f)
         {
-            if (movingToEndPosition)
+            if (moveRight) // Si se mueve hacia la derecha
             {
                 transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-                transform.position = Vector2.MoveTowards(transform.position, XFinal.transform.position, speed * Time.fixedDeltaTime);
-                if (transform.position.x >= XFinal.transform.position.x)
+                transform.position += Vector3.right * speed * Time.deltaTime; // Mover el objeto hacia la derecha
+                if (transform.position.x >= endPos.x) // Si ha alcanzado la posición final
                 {
-                    movingToEndPosition = false;
+                    moveRight = false; // Cambiar la dirección de movimiento a la izquierda
                 }
             }
-            else
+            else // Si se mueve hacia la izquierda
             {
                 transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
-                transform.position = Vector2.MoveTowards(transform.position, XInitial.transform.position, speed * Time.fixedDeltaTime);
-                if (transform.position.x <= XInitial.transform.position.x)
+                transform.position += Vector3.left * speed * Time.deltaTime; // Mover el objeto hacia la izquierda
+                if (transform.position.x <= startPos.x) // Si ha alcanzado la posición inicial
                 {
-                    movingToEndPosition = true;
+                    moveRight = true; // Cambiar la direcci
                 }
             }
         }
+        Animator.SetBool("Dead", Health == 0);
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        GameObject gameObject = GameObject.Find("BulletPrefab(Clone)");
+        GameObject NormalBullet = GameObject.Find("BulletPrefab(Clone)");
+        GameObject OmegaBullet = GameObject.Find("OmegaBullet(Clone)");
+        GameObject MachinelBullet = GameObject.Find("MachinBullet(Clone)");
 
-        if (collision.gameObject == gameObject)
+        if (collision.gameObject == NormalBullet)
         {
-            Animator.SetBool("Dead", collision.gameObject == gameObject);
-            Muerte();
+            Health -= 25;
+        }else if (collision.gameObject == OmegaBullet)
+        {
+            Health -= 100;
+        }else if(collision.gameObject == MachinelBullet)
+        {
+            Health -= 10;
         }
     }
     private void Muerte()

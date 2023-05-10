@@ -4,23 +4,35 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class JohnMovement : MonoBehaviour
 {
-    private float LastShoot;
-    public GameObject BulletPrefab;
+    private float NormalLastShoot;
+    private float MachineLastShoot;
+    private float OmegaLastShoot;
+    public GameObject NormalBulletPrefab;
+    public GameObject OmegaBulletPrefab;
+    public GameObject MachineBullet;
     public float JumpForce;
     public float Speed;
     private Rigidbody2D Rigidbody2D;
     private float Horizontal;
     public bool Grounded;
     private Animator Animator;
-    private int WeaponMode;
+    public int WeaponMode;
+    public float GravityForce = 5.0f;
+    public bool InMobilePlatform;
+    public GameObject MobilePlatform;
+    private int Health;
+
     // Start is called before the first frame update
     void Start()
     {
+        Health = 100;
         Rigidbody2D = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
+        WeaponMode = 1;
     }
 
     // Update is called once per frame
@@ -47,10 +59,47 @@ public class JohnMovement : MonoBehaviour
         {
             Jump();
         }
-        if (Input.GetKey(KeyCode.Space) && Time.time > LastShoot+0.25f)
+        if(WeaponMode == 1)
         {
-            ShootDamage();
-            LastShoot = Time.time;
+            if (Input.GetKey(KeyCode.Space) && Time.time > NormalLastShoot + 0.5f)
+            {
+                ShootDamage();
+                NormalLastShoot = Time.time;
+            }
+        }else if(WeaponMode == 2)
+        {
+            if (Input.GetKey(KeyCode.Space) && Time.time > OmegaLastShoot + 2.0f)
+            {
+                ShootDamage();
+                OmegaLastShoot = Time.time;
+            }
+        }else if (WeaponMode == 0)
+        {
+            if (Input.GetKey(KeyCode.Space) && Time.time > MachineLastShoot + 0.15f)
+            {
+                ShootDamage();
+                MachineLastShoot = Time.time;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            WeaponMode++;
+            if(WeaponMode > 2)
+            {
+                WeaponMode = 0;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            WeaponMode--;
+            if (WeaponMode < 0)
+            {
+                WeaponMode = 2;
+            }
+        }
+        if(Health <= 0)
+        {
+            Animator.SetBool("Dead", Health == 0);
         }
     }
 
@@ -59,8 +108,26 @@ public class JohnMovement : MonoBehaviour
         Vector3 direction;
         if (transform.localScale.x == 1.0f) direction = Vector3.right;
         else direction = Vector3.left;
-        GameObject bullet = Instantiate(BulletPrefab, transform.position + direction * 0.1f, Quaternion.identity);
-        bullet.GetComponent<BulletScript>().SetDirection(direction);
+        if(WeaponMode == 0)
+        {
+            GameObject bullet = Instantiate(MachineBullet, transform.position + direction * 0.1f, Quaternion.identity);
+            bullet.GetComponent<BulletScript>().SetDirection(direction);
+        }
+        else if(WeaponMode == 1)
+        {
+            GameObject bullet = Instantiate(NormalBulletPrefab, transform.position + direction * 0.1f, Quaternion.identity);
+            bullet.GetComponent<BulletScript>().SetDirection(direction);
+        }else if(WeaponMode == 2)
+        {
+            GameObject bullet = Instantiate(OmegaBulletPrefab, transform.position + direction * 0.1f, Quaternion.identity);
+            bullet.GetComponent<OmegaBulletScript>().SetDirection(direction);
+        }
+    }
+
+    private void Die()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneIndex);
     }
 
     private void Jump()
@@ -70,6 +137,34 @@ public class JohnMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (InMobilePlatform)
+        {
+            Rigidbody2D.velocity = new Vector2(transform.parent.GetComponent<MobilePlatform>().speed, Rigidbody2D.velocity.y);
+        }
         Rigidbody2D.velocity = new Vector2(Horizontal, Rigidbody2D.velocity.y);
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        GameObject NormalBullet = GameObject.Find("BulletPrefab(Clone)");
+
+        if (collision.gameObject == NormalBullet)
+        {
+            Health -= 25;
+        }
+        if (collision.gameObject.name == "MobilePlatformTileMap")
+        {
+            transform.parent = collision.transform;
+            InMobilePlatform = true;
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.name == "MobilePlatformTileMap")
+        {
+            transform.parent = null;
+            InMobilePlatform = false;
+        }
     }
 }
