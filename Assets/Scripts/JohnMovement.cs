@@ -161,6 +161,12 @@ public class JohnMovement : MonoBehaviour
             transform.parent = collision.transform;
             InMobilePlatform = true;
         }
+        GameObject obstaculos = GameObject.Find("Obstaculos");
+        if (collision.gameObject == obstaculos)
+        {
+            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(currentSceneIndex);
+        }
     }
 
     void OnCollisionExit2D(Collision2D collision)

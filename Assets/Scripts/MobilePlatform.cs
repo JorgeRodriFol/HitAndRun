@@ -7,36 +7,51 @@ public class MobilePlatform : MonoBehaviour
     public float speed = 1.0f;
     public Vector3 startPos;
     public Vector3 endPos;
-    public bool moveRight = true;
-    private bool JohnOn;
+    public bool moveRight;
+    public bool moveUp;
+    private bool stop;
     public float TimeWaiting;
+    private GameObject PointStop;
 
     void Start()
     {
         startPos = transform.position;
-        JohnOn = false;
+        stop = false;
+        moveRight=false;
+        moveUp = true;
+        PointStop = GameObject.Find("FirstFinishPoint");
     }
 
     void Update()
     {
-        if (JohnOn)
+        if (stop)
         {
-            if (moveRight && Time.time > TimeWaiting + 1.0f) // Si se mueve hacia la derecha
+            if(moveUp)
             {
-                transform.position += Vector3.right * speed * Time.deltaTime; // Mover el objeto hacia la derecha
-                if (transform.position.x >= endPos.x) // Si ha alcanzado la posición final
+                transform.position += Vector3.up * speed * Time.deltaTime;
+                if (transform.position.y >= PointStop.transform.position.y)
                 {
-                    moveRight = false; // Cambiar la dirección de movimiento a la izquierda
-                    TimeWaiting = Time.time;
+                    moveUp = false;
+                    moveRight = true;
+                    PointStop = GameObject.Find("SecondFinishPoint");
+                }
+
+            }
+            else if (moveRight) 
+            {
+                transform.position += Vector3.right * speed * Time.deltaTime; 
+                if (transform.position.x >= PointStop.transform.position.x) 
+                {
+                    moveRight = false;
+                    PointStop = GameObject.Find("FinalFinishPoint");
                 }
             }
-            else if (!moveRight && Time.time > TimeWaiting + 1.0f) // Si se mueve hacia la izquierda
+            else
             {
-                transform.position += Vector3.left * speed * Time.deltaTime; // Mover el objeto hacia la izquierda
-                if (transform.position.x <= startPos.x) // Si ha alcanzado la posición inicial
+                transform.position += Vector3.down * speed * Time.deltaTime;
+                if (transform.position.y <= PointStop.transform.position.y)
                 {
-                    moveRight = true; // Cambiar la direcci
-                    TimeWaiting = Time.time;
+                    stop = false;
                 }
             }
         }
@@ -48,7 +63,7 @@ public class MobilePlatform : MonoBehaviour
 
         if (collision.gameObject == john)
         {
-            JohnOn = true;
+            stop = true;
         }
     }
 }
