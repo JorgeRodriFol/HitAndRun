@@ -8,32 +8,47 @@ public class MobilePlatform : MonoBehaviour
     public Vector3 startPos;
     public Vector3 endPos;
     public bool moveRight = true;
+    private bool JohnOn;
+    public float TimeWaiting;
 
     void Start()
     {
         startPos = transform.position;
-        endPos.x = transform.position.x + 2.0f;
-        endPos.y = transform.position.y;
-        endPos.z = transform.position.z;
+        JohnOn = false;
     }
 
     void Update()
     {
-        if (moveRight) // Si se mueve hacia la derecha
+        if (JohnOn)
         {
-            transform.position += Vector3.right * speed * Time.deltaTime; // Mover el objeto hacia la derecha
-            if (transform.position.x >= endPos.x) // Si ha alcanzado la posición final
+            if (moveRight && Time.time > TimeWaiting + 1.0f) // Si se mueve hacia la derecha
             {
-                moveRight = false; // Cambiar la dirección de movimiento a la izquierda
+                transform.position += Vector3.right * speed * Time.deltaTime; // Mover el objeto hacia la derecha
+                if (transform.position.x >= endPos.x) // Si ha alcanzado la posición final
+                {
+                    moveRight = false; // Cambiar la dirección de movimiento a la izquierda
+                    TimeWaiting = Time.time;
+                }
+            }
+            else if (!moveRight && Time.time > TimeWaiting + 1.0f) // Si se mueve hacia la izquierda
+            {
+                transform.position += Vector3.left * speed * Time.deltaTime; // Mover el objeto hacia la izquierda
+                if (transform.position.x <= startPos.x) // Si ha alcanzado la posición inicial
+                {
+                    moveRight = true; // Cambiar la direcci
+                    TimeWaiting = Time.time;
+                }
             }
         }
-        else // Si se mueve hacia la izquierda
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        GameObject john = GameObject.Find("john");
+
+        if (collision.gameObject == john)
         {
-            transform.position += Vector3.left * speed * Time.deltaTime; // Mover el objeto hacia la izquierda
-            if (transform.position.x <= startPos.x) // Si ha alcanzado la posición inicial
-            {
-                moveRight = true; // Cambiar la direcci
-            }
+            JohnOn = true;
         }
     }
 }

@@ -25,6 +25,7 @@ public class JohnMovement : MonoBehaviour
     public bool InMobilePlatform;
     public GameObject MobilePlatform;
     private int Health;
+    private GameObject Heart;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +34,7 @@ public class JohnMovement : MonoBehaviour
         Rigidbody2D = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
         WeaponMode = 1;
+        Heart = GameObject.Find("Health");
     }
 
     // Update is called once per frame
@@ -151,8 +153,10 @@ public class JohnMovement : MonoBehaviour
         if (collision.gameObject == NormalBullet)
         {
             Health -= 25;
+            Animator animator = Heart.GetComponent<Animator>();
+            animator.SetInteger("Hit", Health);
         }
-        if (collision.gameObject.name == "MobilePlatformTileMap")
+        if (collision.gameObject == MobilePlatform)
         {
             transform.parent = collision.transform;
             InMobilePlatform = true;
@@ -161,7 +165,7 @@ public class JohnMovement : MonoBehaviour
 
     void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.name == "MobilePlatformTileMap")
+        if (collision.gameObject == MobilePlatform)
         {
             transform.parent = null;
             InMobilePlatform = false;
