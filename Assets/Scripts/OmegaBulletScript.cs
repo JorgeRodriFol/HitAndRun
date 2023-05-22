@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OmegaBulletScript : MonoBehaviour
 {
-    private float Speed;
+    public float Speed;
     private Rigidbody2D Rigidbody2D;
     private Vector2 Direction;
     private bool Collision;

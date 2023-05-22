@@ -149,8 +149,10 @@ public class JohnMovement : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject NormalBullet = GameObject.Find("BulletPrefab(Clone)");
+        GameObject BossBullet = GameObject.Find("BossBullet(Clone)");
+        GameObject obstaculos = GameObject.Find("Obstaculos");
 
-        if (collision.gameObject == NormalBullet)
+        if (collision.gameObject == NormalBullet || collision.gameObject == obstaculos)
         {
             Health -= 25;
             Animator animator = Heart.GetComponent<Animator>();
@@ -161,11 +163,11 @@ public class JohnMovement : MonoBehaviour
             transform.parent = collision.transform;
             InMobilePlatform = true;
         }
-        GameObject obstaculos = GameObject.Find("Obstaculos");
-        if (collision.gameObject == obstaculos)
+        if(collision.gameObject == BossBullet)
         {
-            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-            SceneManager.LoadScene(currentSceneIndex);
+            Health -= 50;
+            Animator animator = Heart.GetComponent<Animator>();
+            animator.SetInteger("Hit", Health);
         }
     }
 
