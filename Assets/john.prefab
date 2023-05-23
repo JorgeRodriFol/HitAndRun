@@ -147,6 +147,7 @@ MonoBehaviour:
   GravityForce: 5
   InMobilePlatform: 0
   MobilePlatform: {fileID: 0}
+  Sound: {fileID: 8300000, guid: 055afe49cfbb1974486ba426d7b8bff4, type: 3}
 --- !u!95 &4544023542999459549
 Animator:
   serializedVersion: 5

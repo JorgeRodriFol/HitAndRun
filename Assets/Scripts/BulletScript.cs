@@ -9,9 +9,11 @@ public class BulletScript : MonoBehaviour
     public float Speed;
     private Rigidbody2D Rigidbody2D;
     private Vector2 Direction;
+    public AudioClip Sound;
     // Start is called before the first frame update
     void Start()
     {
+        Camera.main.GetComponent<AudioSource>().PlayOneShot(Sound);
         Rigidbody2D = GetComponent<Rigidbody2D>();
     }
 

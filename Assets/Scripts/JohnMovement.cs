@@ -26,6 +26,7 @@ public class JohnMovement : MonoBehaviour
     public GameObject MobilePlatform;
     private int Health;
     private GameObject Heart;
+    public AudioClip Sound;
 
     // Start is called before the first frame update
     void Start()
@@ -148,26 +149,29 @@ public class JohnMovement : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        GameObject NormalBullet = GameObject.Find("BulletPrefab(Clone)");
+        GameObject NormalBullet = GameObject.Find("EnemyBullet(Clone)");
         GameObject BossBullet = GameObject.Find("BossBullet(Clone)");
         GameObject obstaculos = GameObject.Find("Obstaculos");
-
-        if (collision.gameObject == NormalBullet || collision.gameObject == obstaculos)
+        if (collision.gameObject == NormalBullet || collision.gameObject == obstaculos || collision.gameObject == MobilePlatform || collision.gameObject == BossBullet)
         {
-            Health -= 25;
-            Animator animator = Heart.GetComponent<Animator>();
-            animator.SetInteger("Hit", Health);
-        }
-        if (collision.gameObject == MobilePlatform)
-        {
-            transform.parent = collision.transform;
-            InMobilePlatform = true;
-        }
-        if(collision.gameObject == BossBullet)
-        {
-            Health -= 50;
-            Animator animator = Heart.GetComponent<Animator>();
-            animator.SetInteger("Hit", Health);
+            if (collision.gameObject == NormalBullet || collision.gameObject == obstaculos)
+            {
+                Health -= 25;
+                Animator animator = Heart.GetComponent<Animator>();
+                animator.SetInteger("Hit", Health);
+            }
+            if (collision.gameObject == MobilePlatform)
+            {
+                transform.parent = collision.transform;
+                InMobilePlatform = true;
+            }
+            if (collision.gameObject == BossBullet)
+            {
+                Health -= 50;
+                Animator animator = Heart.GetComponent<Animator>();
+                animator.SetInteger("Hit", Health);
+            }
+            Camera.main.GetComponent<AudioSource>().PlayOneShot(Sound);
         }
     }
 

@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 1958299303042178684}
   - component: {fileID: 1958299303042178685}
   - component: {fileID: 1958299303042178674}
-  - component: {fileID: 5767483603294055691}
   m_Layer: 0
   m_Name: BulletPrefab
   m_TagString: Untagged
@@ -159,15 +158,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 2
---- !u!114 &5767483603294055691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1958299303042178675}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e053b0a94752146e79954ce4df1b5565, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  Sound: {fileID: 8300000, guid: bb20b5b12c9c7af4688b0beb87840b35, type: 3}

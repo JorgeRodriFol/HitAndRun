@@ -9,9 +9,11 @@ public class OmegaBulletScript : MonoBehaviour
     private Vector2 Direction;
     private bool Collision;
     private Animator Animator;
+    public AudioClip Sound;
     // Start is called before the first frame update
     void Start()
     {
+        Camera.main.GetComponent<AudioSource>().PlayOneShot(Sound);
         Animator = GetComponent<Animator>();
         Speed = 1;
         Rigidbody2D = GetComponent<Rigidbody2D>();
