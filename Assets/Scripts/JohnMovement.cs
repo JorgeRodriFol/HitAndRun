@@ -152,18 +152,13 @@ public class JohnMovement : MonoBehaviour
         GameObject NormalBullet = GameObject.Find("EnemyBullet(Clone)");
         GameObject BossBullet = GameObject.Find("BossBullet(Clone)");
         GameObject obstaculos = GameObject.Find("Obstaculos");
-        if (collision.gameObject == NormalBullet || collision.gameObject == obstaculos || collision.gameObject == MobilePlatform || collision.gameObject == BossBullet)
+        if (collision.gameObject == NormalBullet || collision.gameObject == obstaculos || collision.gameObject == BossBullet)
         {
             if (collision.gameObject == NormalBullet || collision.gameObject == obstaculos)
             {
                 Health -= 25;
                 Animator animator = Heart.GetComponent<Animator>();
                 animator.SetInteger("Hit", Health);
-            }
-            if (collision.gameObject == MobilePlatform)
-            {
-                transform.parent = collision.transform;
-                InMobilePlatform = true;
             }
             if (collision.gameObject == BossBullet)
             {
@@ -172,6 +167,11 @@ public class JohnMovement : MonoBehaviour
                 animator.SetInteger("Hit", Health);
             }
             Camera.main.GetComponent<AudioSource>().PlayOneShot(Sound);
+        }
+        if (collision.gameObject == MobilePlatform)
+        {
+            transform.parent = collision.transform;
+            InMobilePlatform = true;
         }
     }
 
