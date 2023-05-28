@@ -10,6 +10,7 @@ public class OmegaBulletScript : MonoBehaviour
     private bool Collision;
     private Animator Animator;
     public AudioClip Sound;
+    public AudioClip Explosion;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +23,13 @@ public class OmegaBulletScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Direction == Vector2.left)
+        {
+            transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+        }
+        else if(Direction == Vector2.right){
+            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        }
         Rigidbody2D.velocity = Direction * Speed;
     }
 
@@ -37,6 +45,7 @@ public class OmegaBulletScript : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         Speed = 0;
+        Camera.main.GetComponent<AudioSource>().PlayOneShot(Explosion);
         Animator.SetBool("Collision", collision.gameObject != null);
     }
 }

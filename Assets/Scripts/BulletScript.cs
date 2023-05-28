@@ -20,6 +20,14 @@ public class BulletScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Direction == Vector2.left)
+        {
+            transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+        }
+        else if (Direction == Vector2.right)
+        {
+            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        }
         Rigidbody2D.velocity = Direction * Speed;
     }
 

@@ -159,3 +159,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 0
   Sound: {fileID: 8300000, guid: 09d6acb1fb0b53042ba21529fa8c5773, type: 3}
+  Explosion: {fileID: 8300000, guid: 351a01f67602967499ef29ffdbf80916, type: 3}

@@ -18,6 +18,8 @@ public class EnemyScript : MonoBehaviour
     public Vector3 startPos;
     public Vector3 endPos;
     public bool moveRight = true;
+    public AudioClip Explosion;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -64,7 +66,12 @@ public class EnemyScript : MonoBehaviour
                 }
             }
         }
+        
         Animator.SetBool("Dead", Health == 0);
+        if(Health == 0)
+        {
+            Camera.main.GetComponent<AudioSource>().PlayOneShot(Explosion);
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
