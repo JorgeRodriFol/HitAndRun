@@ -8,19 +8,14 @@ using UnityEngine.SceneManagement;
 
 public class JohnMovement : MonoBehaviour
 {
-    private float NormalLastShoot;
-    private float MachineLastShoot;
-    private float OmegaLastShoot;
-    public GameObject NormalBulletPrefab;
-    public GameObject OmegaBulletPrefab;
-    public GameObject MachineBullet;
+    
+    
     public float JumpForce;
     public float Speed;
     private Rigidbody2D Rigidbody2D;
     private float Horizontal;
     public bool Grounded;
     private Animator Animator;
-    public int WeaponMode;
     public float GravityForce = 5.0f;
     public bool InMobilePlatform;
     public GameObject MobilePlatform;
@@ -34,7 +29,6 @@ public class JohnMovement : MonoBehaviour
         Health = 100;
         Rigidbody2D = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
-        WeaponMode = 1;
         Heart = GameObject.Find("Health");
     }
 
@@ -62,70 +56,13 @@ public class JohnMovement : MonoBehaviour
         {
             Jump();
         }
-        if(WeaponMode == 1)
-        {
-            if (Input.GetKey(KeyCode.Space) && Time.time > NormalLastShoot + 0.5f)
-            {
-                ShootDamage();
-                NormalLastShoot = Time.time;
-            }
-        }else if(WeaponMode == 2)
-        {
-            if (Input.GetKey(KeyCode.Space) && Time.time > OmegaLastShoot + 2.0f)
-            {
-                ShootDamage();
-                OmegaLastShoot = Time.time;
-            }
-        }else if (WeaponMode == 0)
-        {
-            if (Input.GetKey(KeyCode.Space) && Time.time > MachineLastShoot + 0.15f)
-            {
-                ShootDamage();
-                MachineLastShoot = Time.time;
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            WeaponMode++;
-            if(WeaponMode > 2)
-            {
-                WeaponMode = 0;
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            WeaponMode--;
-            if (WeaponMode < 0)
-            {
-                WeaponMode = 2;
-            }
-        }
         if(Health <= 0)
         {
             Animator.SetBool("Dead", Health == 0);
         }
     }
 
-    private void ShootDamage()
-    {
-        Vector3 direction;
-        if (transform.localScale.x == 1.0f) direction = Vector3.right;
-        else direction = Vector3.left;
-        if(WeaponMode == 0)
-        {
-            GameObject bullet = Instantiate(MachineBullet, transform.position + direction * 0.1f, Quaternion.identity);
-            bullet.GetComponent<BulletScript>().SetDirection(direction);
-        }
-        else if(WeaponMode == 1)
-        {
-            GameObject bullet = Instantiate(NormalBulletPrefab, transform.position + direction * 0.1f, Quaternion.identity);
-            bullet.GetComponent<BulletScript>().SetDirection(direction);
-        }else if(WeaponMode == 2)
-        {
-            GameObject bullet = Instantiate(OmegaBulletPrefab, transform.position + direction * 0.1f, Quaternion.identity);
-            bullet.GetComponent<OmegaBulletScript>().SetDirection(direction);
-        }
-    }
+    
 
     private void Die()
     {

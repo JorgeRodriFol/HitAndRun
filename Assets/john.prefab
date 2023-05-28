@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4544023542999459544}
   - component: {fileID: 4544023542999459550}
   - component: {fileID: 4544023542999459549}
+  - component: {fileID: 7264496353016692420}
   m_Layer: 0
   m_Name: john
   m_TagString: Player
@@ -137,13 +138,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9099a5c2a367b104392ee570c478cf8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NormalBulletPrefab: {fileID: 1958299303042178675, guid: 3fb76183ae3d7d446b66b01bc95966b8, type: 3}
-  OmegaBulletPrefab: {fileID: 3986128569080710655, guid: 4ff14269ce3e7bc4aae5f55146db85f4, type: 3}
-  MachineBullet: {fileID: 6363954897832797923, guid: 8c93a713dc973234987e9fc8ce4bde2e, type: 3}
   JumpForce: 125
   Speed: 1
   Grounded: 0
-  WeaponMode: 0
   GravityForce: 5
   InMobilePlatform: 0
   MobilePlatform: {fileID: 0}
@@ -168,3 +165,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &7264496353016692420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4544023542999459547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40e965e5c3ec16c4597cb32363de4fd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NormalBulletPrefab: {fileID: 1958299303042178675, guid: 3fb76183ae3d7d446b66b01bc95966b8, type: 3}
+  OmegaBulletPrefab: {fileID: 3986128569080710655, guid: 4ff14269ce3e7bc4aae5f55146db85f4, type: 3}
+  MachineBullet: {fileID: 6363954897832797923, guid: 8c93a713dc973234987e9fc8ce4bde2e, type: 3}
+  WeaponMode: 0
+  ChangeWeapon: {fileID: 8300000, guid: a74f3888a4fe54446a4543137c51c257, type: 3}
