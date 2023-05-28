@@ -19,17 +19,19 @@ public class CreateCloudsScript : MonoBehaviour
         CloudsModels[0] = Clouds1;  // Asignar un objeto al primer elemento
         CloudsModels[1] = Clouds2;
         CloudsModels[1] = Clouds3;// Asignar un objeto al segundo elemento
-        SpawnPosition.x = 11.0f;
+        SpawnPosition.x = 11.48f;
         SpawnPosition.y = 0.2f;
+        SpawnPosition.z = 0.32f;
     }
 
     // Update is called once per frame
     void Update()
     {
         int ModelId = UnityEngine.Random.Range(0, 3);
-        if (Time.time == TimeSpawn + 1.0f)
+        if (Time.time > TimeSpawn + 20.0f)
         {
             GameObject Cloud = Instantiate(CloudsModels[ModelId], SpawnPosition, Quaternion.identity);
+            TimeSpawn = Time.time;
         }
     }
 }
