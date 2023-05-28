@@ -114,6 +114,7 @@ public class JohnMovement : MonoBehaviour
 
     void OnCollisionExit2D(Collision2D collision)
     {
+        Grounded = false;
         if (collision.gameObject == MobilePlatform)
         {
             transform.parent = null;

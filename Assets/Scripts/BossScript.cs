@@ -43,12 +43,12 @@ public class BossScript : MonoBehaviour
         if (collision.gameObject == NormalBullet)
         {
             UnityEngine.Debug.Log("Golpeado bala amarilla");
-            Health = Health - 20;
+            Health = Health - 15;
         }
         else if (collision.gameObject == OmegaBullet)
         {
             UnityEngine.Debug.Log("Golpeado bala roja");
-            Health = Health - 50;
+            Health = Health - 30;
         }
         else if (collision.gameObject == MachinelBullet)
         {
