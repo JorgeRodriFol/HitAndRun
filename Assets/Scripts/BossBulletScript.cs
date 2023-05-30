@@ -11,6 +11,7 @@ public class BossBulletScript : MonoBehaviour
     private Vector3 Direction;
     private Animator Animator;
     private GameObject Boss;
+    public AudioClip Explosion;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,10 +24,6 @@ public class BossBulletScript : MonoBehaviour
         if (colliderA != null && colliderB != null)
         {
             Physics2D.IgnoreCollision(colliderA, colliderB);
-        }
-        else
-        {
-            UnityEngine.Debug.LogError("Los colliders no están asignados correctamente.");
         }
     }
 
@@ -48,6 +45,7 @@ public class BossBulletScript : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         Speed = 0;
+        Camera.main.GetComponent<AudioSource>().PlayOneShot(Explosion);
         Animator.SetBool("Hit", true);
     }
 }

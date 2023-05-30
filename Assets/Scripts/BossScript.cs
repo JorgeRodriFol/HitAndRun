@@ -9,27 +9,28 @@ public class BossScript : MonoBehaviour
     public GameObject BossBullet;
     private int Health;
     private float Recarga;
+    private Animator animator;
     // Start is called before the first frame update
     void Start()
     {
         John = GameObject.Find("john");
         Health = 200;
-        
+        animator = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
         
-        if (Time.time > Recarga + 2.0f)
+        if (Time.time > Recarga + 2.0f && Health > 0)
         {
             Shoot();
             Recarga = Time.time;
         }
         if(Health <= 0)
         {
-            UnityEngine.Debug.Log("Muerto");
-            Die();
+            animator.SetBool("Dead", true);
         }
     }
 
@@ -42,17 +43,14 @@ public class BossScript : MonoBehaviour
 
         if (collision.gameObject == NormalBullet)
         {
-            UnityEngine.Debug.Log("Golpeado bala amarilla");
             Health = Health - 15;
         }
         else if (collision.gameObject == OmegaBullet)
         {
-            UnityEngine.Debug.Log("Golpeado bala roja");
             Health = Health - 30;
         }
         else if (collision.gameObject == MachinelBullet)
         {
-            UnityEngine.Debug.Log("Golpeado bala azul");
             Health = Health - 7;
         }
         UnityEngine.Debug.Log("Vida restante: "+ Health);

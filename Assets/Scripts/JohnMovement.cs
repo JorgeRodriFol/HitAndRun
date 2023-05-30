@@ -19,7 +19,7 @@ public class JohnMovement : MonoBehaviour
     public float GravityForce = 5.0f;
     public bool InMobilePlatform;
     public GameObject MobilePlatform;
-    private int Health;
+    public int Health;
     private GameObject Heart;
     public AudioClip Sound;
 
@@ -44,14 +44,7 @@ public class JohnMovement : MonoBehaviour
             transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         }
         Animator.SetBool("Running", Horizontal != 0.0f);
-        if (Physics2D.Raycast(transform.position, Vector3.down, 0.1f))
-        {
-            Grounded = true;
-        }
-        else
-        {
-            Grounded = false;
-        }
+        
         if (Input.GetKeyDown(KeyCode.W) && Grounded)
         {
             Jump();
@@ -60,6 +53,7 @@ public class JohnMovement : MonoBehaviour
         {
             Animator.SetBool("Dead", Health == 0);
         }
+        
     }
 
     
@@ -89,19 +83,20 @@ public class JohnMovement : MonoBehaviour
         GameObject NormalBullet = GameObject.Find("EnemyBullet(Clone)");
         GameObject BossBullet = GameObject.Find("BossBullet(Clone)");
         GameObject obstaculos = GameObject.Find("Obstaculos");
+        GameObject mapa = GameObject.Find("Tilemap");
+        if(collision.gameObject == mapa)
+        {
+            Grounded = true;
+        }
         if (collision.gameObject == NormalBullet || collision.gameObject == obstaculos || collision.gameObject == BossBullet)
         {
-            if (collision.gameObject == NormalBullet || collision.gameObject == obstaculos)
+            if (collision.gameObject == NormalBullet)
             {
-                Health -= 25;
-                Animator animator = Heart.GetComponent<Animator>();
-                animator.SetInteger("Hit", Health);
+                Dañado(25);
             }
             if (collision.gameObject == BossBullet)
             {
-                Health -= 50;
-                Animator animator = Heart.GetComponent<Animator>();
-                animator.SetInteger("Hit", Health);
+                Dañado(50);
             }
             Camera.main.GetComponent<AudioSource>().PlayOneShot(Sound);
         }
@@ -120,5 +115,13 @@ public class JohnMovement : MonoBehaviour
             transform.parent = null;
             InMobilePlatform = false;
         }
+    }
+
+    public void Dañado(int dañoRecivido)
+    {
+        Health -= dañoRecivido;
+        Animator animator = Heart.GetComponent<Animator>();
+        animator.SetInteger("Hit", Health);
+        Camera.main.GetComponent<AudioSource>().PlayOneShot(Sound);
     }
 }

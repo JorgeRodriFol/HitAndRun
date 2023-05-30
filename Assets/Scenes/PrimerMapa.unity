@@ -11443,6 +11443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimeSpawn: 0
+  Delay: 20
   Clouds1: {fileID: 4831326053343185714, guid: eeadb0fdbec72d148b6ff4404a925665, type: 3}
   Clouds2: {fileID: 9031818861715784638, guid: aef250fc8a115c9439fdde2d50916870, type: 3}
   Clouds3: {fileID: 7926137352495619878, guid: 09a0f0794df577e46a2651dedf97c79e, type: 3}
